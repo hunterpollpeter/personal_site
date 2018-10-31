@@ -1,0 +1,44 @@
+$twitch_purple: #6441A4;
+$box-shadow: 0 15px 10px -10px rgba(0, 0, 0, 0.5), 0 1px 4px rgba(0, 0, 0, 0.3);
+
+body {
+  background: $twitch_purple;
+}
+
+.card {
+  box-shadow: $box-shadow;
+}
+
+.btn-twitch {
+  color: white;
+  background-color: $twitch_purple;
+  &:hover {
+    color: white;
+    background-color: darken($twitch_purple, 10);
+  }
+  &:focus {
+    box-shadow: 0 0 0 0.2rem lighten($twitch_purple, 30);
+  }
+}
+
+.btn-outline-twitch {
+  color: $twitch_purple;
+  background-color: transparent;
+  background-image: none;
+  border-color: $twitch_purple;
+  &:hover {
+    color: white;
+    background-color: $twitch_purple;
+  }
+}
+
+iframe {
+  width: 100%;
+  zoom: 0.71;
+  -moz-transform: scale(0.71);
+  -moz-transform-origin: 0 0;
+  -o-transform: scale(0.71);
+  -o-transform-origin: 0 0;
+  -webkit-transform: scale(0.71);
+  -webkit-transform-origin: 0 0;
+}

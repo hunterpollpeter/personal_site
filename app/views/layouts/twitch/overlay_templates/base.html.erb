@@ -1,0 +1,16 @@
+<html>
+<head>
+  <!--  include jquery on all templates-->
+  <%= javascript_include_tag 'jquery3' %>
+  <% @scripts.each do |script| %>
+    <%= javascript_include_tag script %>
+  <% end %>
+  <% @styles.each do |style| %>
+    <%= stylesheet_link_tag style, media: 'all' %>
+  <% end %>
+</head>
+<body>
+  <%= yield %>
+  <%= yield :script %>
+</body>
+</html>

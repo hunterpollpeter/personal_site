@@ -1,0 +1,222 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Pacifico';
+}
+#video-background {
+    width: 400px;
+    height: 275px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+}
+#video-wrapper {
+    position: relative;
+    width: 450px;
+    height: 325px;
+    overflow: hidden;
+    clip-path: polygon(0px 0px, 0px 450px, 25px 325px, 25px 77px, 425px 77px, 425px 300px, 25px 300px, 25px 325px, 450px 325px, 450px 0px);
+}
+#video {
+    z-index: 200;
+    position: absolute;
+    bottom: 0;
+    width: 400px;
+    height: 223px;
+    background-color: gray;
+    border-top: 4px solid;
+    box-shadow: 0 0 25px #000000;
+}
+#particles {
+    z-index: 100;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+#text {
+    position: absolute;
+    top: 35px;
+    width: 450px;
+    text-align: center;
+    -webkit-animation: glow 1.5s ease-in-out infinite alternate;
+    -moz-animation: glow 1.5s ease-in-out infinite alternate;
+    animation: glow 1.5s ease-in-out infinite alternate;
+    color: #fff;
+    font-size: 48px;
+}
+#notifications {
+    width: 400px;
+    list-style-type: none;
+    padding: 0;
+    margin: -15px 25px 0;
+    position: relative;
+}
+#notifications .icon {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    left: 0;
+    text-align: center;
+}
+.svg {
+    fill: white;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    filter: drop-shadow( 1px 1px 1px #000 );
+}
+.svg-heart {
+    transform: scale(1.25);
+    animation: heartbeat 2s infinite;
+}
+#notifications li {
+    margin-left: 50px;
+    margin-bottom: 10px;
+    line-height: 40px;
+    background: linear-gradient(to right, rgba(0,0,0,0.65) 0%,rgba(0,0,0,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    padding-left: 10px;
+    color: white;
+    font-family: sans-serif;
+    text-shadow: 1px 1px 2px #000;
+    font-size: 20px;
+}
+.equilizer {
+    height: 32px;
+    width: 32px;
+    transform: rotate(180deg);
+    filter: drop-shadow( -1px -1px 1px #000 );
+    margin-left: -8px;
+}
+
+.bar {
+    fill: white;
+    width: 18px;
+    animation: equalize 5s steps(25, end) 0s infinite;
+}
+
+.bar:nth-child(1) {
+    animation-duration: 1.9s;
+}
+
+.bar:nth-child(2) {
+    animation-duration: 2s;
+}
+
+.bar:nth-child(3) {
+    animation-duration: 2.3s;
+}
+
+.bar:nth-child(4) {
+    animation-duration: 2.4s;
+}
+
+@keyframes equalize {
+    0% {
+        height: 60px;
+    }
+    4% {
+        height: 50px;
+    }
+    8% {
+        height: 40px;
+    }
+    12% {
+        height: 30px;
+    }
+    16% {
+        height: 20px;
+    }
+    20% {
+        height: 30px;
+    }
+    24% {
+        height: 40px;
+    }
+    28% {
+        height: 10px;
+    }
+    32% {
+        height: 40px;
+    }
+    36% {
+        height: 60px;
+    }
+    40% {
+        height: 20px;
+    }
+    44% {
+        height: 40px;
+    }
+    48% {
+        height: 70px;
+    }
+    52% {
+        height: 30px;
+    }
+    56% {
+        height: 10px;
+    }
+    60% {
+        height: 30px;
+    }
+    64% {
+        height: 50px;
+    }
+    68% {
+        height: 60px;
+    }
+    72% {
+        height: 70px;
+    }
+    76% {
+        height: 80px;
+    }
+    80% {
+        height: 70px;
+    }
+    84% {
+        height: 60px;
+    }
+    88% {
+        height: 50px;
+    }
+    92% {
+        height: 60px;
+    }
+    96% {
+        height: 70px;
+    }
+    100% {
+        height: 80px;
+    }
+}
+@keyframes glow {
+    from {
+        text-shadow: 0 0 20px #000, 0 0 30px #000, 0 0 40px #000, 0 0 50px rgba(0,0,0,0), 0 0 80px rgba(0,0,0,0), 0 0 90px rgba(0,0,0,0), 0 0 110px rgba(0,0,0,0), 0 0 150px rgba(0,0,0,0);
+    }
+    to {
+        text-shadow: 0 0 5px #000, 0 0 10px #000, 0 0 15px #000, 0 0 20px rgba(0,0,0,0), 0 0 35px rgba(0,0,0,0), 0 0 40px rgba(0,0,0,0), 0 0 50px rgba(0,0,0,0), 0 0 75px rgba(0,0,0,0);
+    }
+}
+@keyframes gradient-glow {
+    0%{background-position:50% 0%}
+    50%{background-position:51% 100%}
+    100%{background-position:50% 0%}
+}
+@keyframes heartbeat
+{
+    0%{transform: scale( 1 );}
+    20%{transform: scale( 1.25 );}
+    40%{transform: scale( 1 );}
+    60%{transform: scale( 1.25 );}
+    80%{transform: scale( 1 );}
+    100%{transform: scale( 1 );}
+}
