@@ -10,12 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_23_232849) do
+ActiveRecord::Schema.define(version: 2018_11_01_014612) do
 
   create_table "twitch_engine_overlays", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.string "template_name"
     t.json "options"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "twitch_engine_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "uid", default: "", null: false
+    t.string "username", default: "", null: false
+    t.string "image_url", default: "", null: false
+    t.string "token", default: "", null: false
+    t.json "data"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

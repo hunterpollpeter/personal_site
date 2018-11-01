@@ -1,5 +1,5 @@
 module TwitchEngine
   class Overlay < ApplicationRecord
-    belongs_to :twitch_user
+    belongs_to :user
   end
 end

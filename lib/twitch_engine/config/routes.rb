@@ -6,4 +6,6 @@ TwitchEngine::Engine.routes.draw do
   get 'overlays/:id', to: 'overlays#show', as: :twitch_overlay
 
   get 'templates/:name', to: 'overlays#template', as: :twitch_overlay_template
+
+  devise_for :users, skip: :sessions, class_name: "TwitchEngine::User", controllers: { omniauth_callbacks: "twitch_engine/users/omniauth_callbacks" }
 end

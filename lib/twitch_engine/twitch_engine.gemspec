@@ -16,5 +16,7 @@ Gem::Specification.new do |s|
 
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
 
+  s.add_dependency "devise"
+  s.add_dependency "omniauth-twitch"
   s.add_dependency "rails", "~> 5.2.1"
 end
