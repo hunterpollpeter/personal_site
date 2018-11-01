@@ -10,31 +10,52 @@
 </head>
 
 <body>
-<nav class="navbar navbar-expand-md navbar-dark">
+<nav class="navbar navbar-expand-md bg-twitch navbar-dark">
   <div class="container">
-    <a class="navbar-brand" href="#">Hunter Pollpeter Twitch</a>
+    <a class="navbar-brand" href="#">
+      Twitch
+      <span class="font-weight-light text-white-50">Hunter Pollpeter</span>
+    </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarsExample04">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <%= link_to 'Overlays', root_path, class: 'nav-link' %>
+          <%= link_to 'Stream', root_path, class: 'nav-link' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'Overlays', twitch_overlays_path, class: 'nav-link' %>
         </li>
       </ul>
       <% if current_user %>
-        Welcome, <%= current_user.username %>
+        <div class="dropdown show">
+          <a href="#" class="btn btn-outline-twitch-light dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <%= image_tag current_user.image_url, class: 'avatar mr-1' %>
+            <%= current_user.username %>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+            <%= link_to 'Log out', user_sign_out_path, class:'dropdown-item' %>
+          </div>
+        </div>
       <% else  %>
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <%= link_to 'Log in with Twitch', user_twitch_omniauth_authorize_path, class: 'nav-link' %>
-          </li>
-        </ul>
+        <%= link_to user_twitch_omniauth_authorize_path, class: 'btn btn-outline-twitch-light' do %>
+          <svg overflow="visible" width="20px" height="20px" version="1.1" viewBox="0 0 30 30" x="0px" y="0px">
+            <g>
+              <path d="M4,7 L5.56799,3 L27,3 L27,18 L21,24 L16,24 L12.88599,27 L9,27 L9,24 L4,24 L4,7 Z M21,20 L25,16 L25,5 L8,5 L8,20 L12,20 L12,23 L15,20 L21,20 Z"></path>
+              <g>
+                <polygon points="21 9 19 9 19 15 21 15"></polygon>
+                <polygon points="16 9 14 9 14 15 16 15"></polygon>
+              </g>
+            </g>
+          </svg>
+          Log in with Twitch
+        <% end %>
       <% end %>
     </div>
   </div>
 </nav>
-<div class="container">
+<div class="container mt-2">
   <%= yield %>
 </div>
 </body>

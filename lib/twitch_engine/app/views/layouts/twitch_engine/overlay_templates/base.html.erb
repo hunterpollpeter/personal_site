@@ -9,8 +9,10 @@
     <%= stylesheet_link_tag style, media: 'all' %>
   <% end %>
 </head>
-<body>
-  <%= yield %>
+<body style="overflow: hidden; text-align: center;">
+  <div style="display: inline-block">
+    <%= yield %>
+  </div>
   <%= yield :script %>
 </body>
 </html>

@@ -1,12 +1,31 @@
 $twitch_purple: #6441A4;
-$box-shadow: 0 15px 10px -10px rgba(0, 0, 0, 0.5), 0 1px 4px rgba(0, 0, 0, 0.3);
 
-body {
-  background: $twitch_purple;
+.bg-twitch {
+  background-color: $twitch_purple;
 }
 
-.card {
-  box-shadow: $box-shadow;
+.avatar {
+  height: 1.5rem;
+  width: 1.5rem;
+  vertical-align: top;
+}
+
+.btn-outline-twitch-light {
+  color: $light;
+  background-color: transparent;
+  background-image: none;
+  border-color: $light;
+  fill: $light;
+  transition: all .15s;
+  &:hover, &:focus {
+    color: $twitch_purple;
+    background-color: $light;
+    border-color: $light;
+    fill: $twitch_purple;
+  }
+  &:focus {
+    box-shadow: 0 0 0 0.2rem transparentize($light, .65)
+  }
 }
 
 .btn-twitch {
@@ -32,13 +51,24 @@ body {
   }
 }
 
-iframe {
-  width: 100%;
-  zoom: 0.71;
-  -moz-transform: scale(0.71);
-  -moz-transform-origin: 0 0;
-  -o-transform: scale(0.71);
-  -o-transform-origin: 0 0;
-  -webkit-transform: scale(0.71);
-  -webkit-transform-origin: 0 0;
+.iframe-wrap {
+  position: relative;
+  height: 0;
+  padding-top: 100%;
+  overflow: hidden;
+  background: #191a1d;
+
+  iframe {
+    width: 200%;
+    height: 200%;
+    border: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    -webkit-transform: scale(0.5);
+    transform: scale(0.5);
+    -webkit-transform-origin: top left;
+    transform-origin: top left;
+    padding: 1rem;
+  }
 }

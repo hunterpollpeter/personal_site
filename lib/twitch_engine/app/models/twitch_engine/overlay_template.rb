@@ -48,8 +48,8 @@ module TwitchEngine
 
     # particles template
     overlay_template 'particles', settings: {
-        color: :color,
-        name: :text
+      color: :color,
+      name: :text
     }
   end
 end
