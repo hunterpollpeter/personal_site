@@ -2,7 +2,7 @@ module TwitchEngine
   class OverlaysController < ApplicationController
     def index
       @templates = OverlayTemplate.templates.keys
-      @overlays = Overlay.all
+      @overlays = current_user&.overlays&.all
     end
 
     def template
