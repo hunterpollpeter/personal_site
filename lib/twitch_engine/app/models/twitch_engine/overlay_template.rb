@@ -6,8 +6,8 @@ module TwitchEngine
       attr_accessor :templates
     end
 
-    def self.overlay_template(name, settings:)
-      templates[name] = settings
+    def self.overlay_template(name, options:)
+      templates[name] = options
     end
 
     def self.styles(name:)
@@ -20,6 +20,12 @@ module TwitchEngine
 
     def self.layout
       'twitch_engine/overlay_templates/base'
+    end
+
+    def self.defaults(name:)
+      options = {}
+      templates[name].each { |k, v| options[k] = v[:default] }
+      options
     end
 
     private
@@ -47,9 +53,15 @@ module TwitchEngine
     end
 
     # particles template
-    overlay_template 'particles', settings: {
-      color: :color,
-      name: :text
+    overlay_template 'particles', options: {
+      color: {
+        type: :color,
+        default: '#e25600'
+      },
+      name: {
+        type: :text,
+        default: 'Your Name'
+      }
     }
   end
 end

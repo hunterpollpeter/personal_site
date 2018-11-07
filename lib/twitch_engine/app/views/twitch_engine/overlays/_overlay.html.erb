@@ -1,0 +1,11 @@
+<div class="col-md-3">
+  <div class="card iframe-wrapper bg-light">
+    <iframe class="thumb" src="<%= twitch_overlay_preview_path(id: overlay.id) %>"></iframe>
+    <div class="content overlay d-flex align-items-end">
+      <div class="w-100">
+        <h4 class="text-light mb-2"><%= overlay.name %></h4>
+        <a href="<%= edit_twitch_overlay_path(overlay.id) %>" class="btn btn-outline-twitch-light d-block">Edit this overlay</a>
+      </div>
+    </div>
+  </div>
+</div>

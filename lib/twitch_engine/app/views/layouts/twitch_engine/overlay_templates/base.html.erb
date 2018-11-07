@@ -8,9 +8,10 @@
   <% @styles.each do |style| %>
     <%= stylesheet_link_tag style, media: 'all' %>
   <% end %>
+  <%= yield :style %>
 </head>
-<body style="overflow: hidden; text-align: center;">
-  <div style="display: inline-block">
+<body style="overflow: hidden; display: flex; align-items: center; justify-content: center;">
+  <div style="display: inline-block; position: relative;">
     <%= yield %>
   </div>
   <%= yield :script %>
