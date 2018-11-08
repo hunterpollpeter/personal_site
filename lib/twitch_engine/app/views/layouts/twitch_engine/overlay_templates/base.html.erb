@@ -1,17 +1,15 @@
 <html>
 <head>
-  <!--  include jquery on all templates-->
-  <%= javascript_include_tag 'jquery3' %>
-  <% @scripts.each do |script| %>
-    <%= javascript_include_tag script %>
-  <% end %>
-  <% @styles.each do |style| %>
-    <%= stylesheet_link_tag style, media: 'all' %>
-  <% end %>
+  <%= javascript_include_tag template_asset_path 'base' %>
+  <%= javascript_include_tag template_asset_path @name %>
+  <%= yield :script_tags %>
+  <%= stylesheet_link_tag template_asset_path 'base' %>
+  <%= stylesheet_link_tag template_asset_path @name %>
+  <%= yield :style_tags %>
   <%= yield :style %>
 </head>
-<body style="overflow: hidden; display: flex; align-items: center; justify-content: center;">
-  <div style="display: inline-block; position: relative;">
+<body>
+  <div id="container">
     <%= yield %>
   </div>
   <%= yield :script %>

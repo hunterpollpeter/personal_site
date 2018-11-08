@@ -16,15 +16,16 @@ module TwitchEngine
 
     def template
       @options = @options.with_indifferent_access
-      @scripts = OverlayTemplate.scripts(name: @name)
-      @styles = OverlayTemplate.styles(name: @name)
+      @name = @template[:name]
+      # @scripts = OverlayTemplate.scripts(name: @name)
+      # @styles = OverlayTemplate.styles(name: @name)
 
       render "twitch_engine/overlay_templates/#{@name}", layout: OverlayTemplate.layout
     end
 
     def preview_template
-      @name = overlays_params[:name]
-      @options = OverlayTemplate.defaults(name: @name)
+      @template = OverlayTemplate.templates[overlays_params[:id].to_i]
+      @options = OverlayTemplate.defaults(@template)
       @preview = true
       template
     end
@@ -36,7 +37,7 @@ module TwitchEngine
 
     def show
       @overlay = Overlay.find_by(id: overlays_params[:id])
-      @name = @overlay.template_name
+      @template = OverlayTemplate.templates[@overlay.template_id]
       @options = @overlay.options
       template
     end
@@ -44,7 +45,7 @@ module TwitchEngine
     private
 
     def overlays_params
-      params.permit(%i[name id])
+      params.permit(%i[id])
     end
   end
 end

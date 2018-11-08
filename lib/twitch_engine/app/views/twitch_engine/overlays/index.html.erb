@@ -5,7 +5,7 @@
         <h5 class="card-title">Overlays</h5>
         <hr>
         <div class="row">
-          <% @overlays.each do |overlay| %>
+          <% @overlays&.each do |overlay| %>
             <%= render partial: "overlay", locals: { overlay: overlay } %>
           <% end %>
         </div>
@@ -20,8 +20,8 @@
         <h5 class="card-title">Templates</h5>
         <hr>
         <div class="row">
-          <% @templates.each do |name| %>
-            <%= render partial: "template", locals: { name: name } %>
+          <% @templates.each do |template_id| %>
+            <%= render partial: "template", locals: { id: template_id } %>
           <% end %>
         </div>
       </div>

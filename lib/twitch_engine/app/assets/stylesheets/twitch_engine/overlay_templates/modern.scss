@@ -1,0 +1,72 @@
+.wrapper {
+  font-family: Arial;
+  color: white;
+  text-shadow: 1px 1px 0 black;
+  .bg-dark {
+    background-color: #333;
+  }
+  .bg-image {
+    background-size: cover;
+    background-position: center;
+    background-color: #111;
+    background-blend-mode: soft-light;
+  }
+  .element {
+    position: relative;
+    display: flex;
+    .w-15 {
+      width: 15%;
+    }
+    .w-85 {
+      width: 85%;
+    }
+    .w-100 {
+      width: 100%;
+    }
+    .box {
+      width: 100%;
+      padding-top: 100%;
+      position: relative;
+      &.image {
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        z-index: 100;
+      }
+    }
+    .content {
+      padding: 10px 20px;
+      box-sizing: border-box;
+      position: relative;
+      .title {
+        font-size: 20px;
+        margin-bottom: 5px;
+      }
+      .value {
+        font-size: 24px;
+      }
+    }
+  }
+  .progress-wrapper {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    z-index: 200;
+    #spotify-progress {
+      background-color: #1DB954;
+    }
+    .progress {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 67%;
+    }
+  }
+  .vertical-center {
+    display: flex;
+    align-items: center;
+  }
+}
