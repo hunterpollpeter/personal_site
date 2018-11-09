@@ -38,6 +38,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'twitch_engine', path: 'lib/twitch_engine'
 
 gem 'bootstrap', '~> 4.1.3'
+gem 'httparty'
 gem 'jquery-rails'
 
 group :development, :test do

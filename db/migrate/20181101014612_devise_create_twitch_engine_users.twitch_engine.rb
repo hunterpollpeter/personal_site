@@ -2,13 +2,16 @@
 class DeviseCreateTwitchEngineUsers < ActiveRecord::Migration[5.2]
   def change
     create_table :twitch_engine_users do |t|
-      t.string :email,              null: false, default: ""
-      t.string :encrypted_password, null: false, default: ""
-      t.string :uid,                null: false, default: ""
-      t.string :username,           null: false, default: ""
-      t.string :image_url,          null: false, default: ""
-      t.string :token,              null: false, default: ""
-      t.json   :data
+      t.string    :email
+      t.string    :encrypted_password
+      t.string    :uid
+      t.string    :username
+      t.string    :image_url
+      t.string    :token
+      t.json      :data
+      t.string    :spotify_token
+      t.string    :spotify_refresh_token
+      t.datetime  :spotify_expires
       t.timestamps null: false
     end
   end

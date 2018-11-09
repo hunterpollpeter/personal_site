@@ -1,5 +1,6 @@
 <html>
 <head>
+  <%= javascript_include_tag 'jquery3.min.js' %>
   <%= javascript_include_tag template_asset_path 'base' %>
   <%= javascript_include_tag template_asset_path @name %>
   <%= yield :script_tags %>

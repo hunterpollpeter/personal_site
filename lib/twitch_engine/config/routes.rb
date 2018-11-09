@@ -11,6 +11,7 @@ TwitchEngine::Engine.routes.draw do
   get 'templates/:id/preview', to: 'overlays#preview_template', as: :twitch_overlay_template_preview
 
   get 'users/sign_out', to: 'users#sign_out', as: :user_sign_out
+  get 'users/:id/spotify_currently_playing', to: 'users#spotify_currently_playing', as: :user_spotify_currently_playing
 
   devise_for :users, skip: :sessions, class_name: "TwitchEngine::User", controllers: { omniauth_callbacks: "twitch_engine/users/omniauth_callbacks" }
 end

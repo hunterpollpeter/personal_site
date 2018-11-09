@@ -1,4 +1,6 @@
 .wrapper {
+  width: 640px;
+
   font-family: Arial;
   color: white;
   text-shadow: 1px 1px 0 black;
@@ -39,11 +41,14 @@
       box-sizing: border-box;
       position: relative;
       .title {
-        font-size: 20px;
+        font-size: 24px;
         margin-bottom: 5px;
       }
       .value {
         font-size: 24px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
       }
     }
   }
@@ -54,15 +59,16 @@
     right: 0;
     height: 4px;
     z-index: 200;
-    #spotify-progress {
-      background-color: #1DB954;
+    #song-progress {
+      width: 67%;
     }
     .progress {
       position: absolute;
       top: 0;
       left: 0;
       bottom: 0;
-      width: 67%;
+      background-color: #1DB954;
+      transition: width 3s linear;
     }
   }
   .vertical-center {

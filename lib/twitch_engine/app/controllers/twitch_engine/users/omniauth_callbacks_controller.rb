@@ -1,10 +1,13 @@
 module TwitchEngine
   class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
-    layout 'twitch_engine/application'
-
     def twitch
       @user = User.from_omniauth(request.env["omniauth.auth"])
       sign_in @user
+      redirect_to root_path
+    end
+
+    def spotify
+      current_user.spotify_credentials!(request.env["omniauth.auth"]&.fetch('credentials'))
       redirect_to root_path
     end
 

@@ -10,5 +10,10 @@ Devise.setup do |config|
   config.skip_session_storage = [:http_auth]
   config.email_regexp = /\A[^@\s]+@[^@\s]+\z/
   config.sign_out_via = :delete
-  config.omniauth :twitch, ENV['TWITCH_CLIENT_ID'], ENV['TWITCH_CLIENT_SECRET'], redirect_uri: 'http://twitch.host.local/users/auth/twitch/callback'
+
+  # twitch strategy
+  config.omniauth :twitch, ENV['TWITCH_CLIENT_ID'], ENV['TWITCH_CLIENT_SECRET'], redirect_uri: 'https://twitch.host.local:3000/users/auth/twitch/callback'
+
+  # spotify strategy
+  config.omniauth :spotify, ENV['SPOTIFY_CLIENT_ID'], ENV['SPOTIFY_CLIENT_SECRET'], scope: 'user-read-currently-playing'
 end

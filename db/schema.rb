@@ -22,13 +22,16 @@ ActiveRecord::Schema.define(version: 2018_11_01_014612) do
   end
 
   create_table "twitch_engine_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "uid", default: "", null: false
-    t.string "username", default: "", null: false
-    t.string "image_url", default: "", null: false
-    t.string "token", default: "", null: false
+    t.string "email"
+    t.string "encrypted_password"
+    t.string "uid"
+    t.string "username"
+    t.string "image_url"
+    t.string "token"
     t.json "data"
+    t.string "spotify_token"
+    t.string "spotify_refresh_token"
+    t.datetime "spotify_expires"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
