@@ -28,22 +28,3 @@
     </div>
   </div>
 </div>
-
-
-<% content_for :script do %>
-  <script type="text/javascript" charset="utf-8">
-    webcam();
-    spotify_currently_playing(1, function(data) {
-      $('#song-title').html(data.title);
-      $('#song-artists').html(data.artists);
-      $('#song-progress').width(`${data.duration_pct}%`);
-      $('.song-image').css("background-image", `url(${data.album_image})`);
-      if (data.is_playing) {
-				$('#now-playing').animate({	height: 'show' });
-			}
-			else {
-				$('#now-playing').animate({	height: 'hide' });
-      }
-    });
-  </script>
-<% end %>
