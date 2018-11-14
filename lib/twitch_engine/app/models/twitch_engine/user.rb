@@ -62,21 +62,27 @@ module TwitchEngine
     end
 
     def most_recent_follower
-      # resp = HTTParty.get(self.class.twitch_followers_path, query: { to_id: self.data['uid'], first: 1 }, headers: { 'Client-ID': ENV['TWITCH_CLIENT_ID'] })
-      # resp_data = resp['data'][0]
-      # recent_follower_id = resp_data['from_id']
-      # if data['recent_follower_id'].nil? || data['recent_follower_id'] != recent_follower_id
-      #   self.data['recent_follower_id'] = recent_follower_id
-      #   self.data['recent_follower_name'] = resp_data['from_name']
-      #   self.data['recent_follower_image'] = self.class.user_image(recent_follower_id)
-      #   self.data['recent_follwer_at'] = resp_data['followed_at']
-      #   self.save
-      # end
+      recent_follower = self.data['recent_follower'] || get_most_recent_follower
       {
-          user_name: self.data['recent_follower_name'],
-          followed_ago: "#{time_ago_in_words(self.data['recent_follwer_at'])} ago",
-          user_image: self.data['recent_follower_image']
+          user_name: recent_follower['user_name'],
+          followed_ago: "#{time_ago_in_words(recent_follower['from'])} ago",
+          user_image: recent_follower['user_image']
       }
+    end
+
+    def get_most_recent_follower
+      resp = HTTParty.get(self.class.twitch_followers_path, query: { to_id: self.data['uid'], first: 1 }, headers: { 'Client-ID': ENV['TWITCH_CLIENT_ID'] })
+      resp_data = resp['data'][0]
+      recent_follower_id = resp_data['from_id']
+      recent_follower = {
+          'id': recent_follower_id,
+          'user_name':  resp_data['from_name'],
+          'user_image': self.class.user_image(recent_follower_id),
+          'from': resp_data['followed_at']
+      }
+      self.data['recent_follower'] = recent_follower
+      self.save
+      recent_follower
     end
 
     def self.user_image(user_id)
