@@ -11,7 +11,9 @@ TwitchEngine::Engine.routes.draw do
   get 'templates/:id/preview', to: 'overlays#preview_template', as: :twitch_overlay_template_preview
 
   get 'users/sign_out', to: 'users#sign_out', as: :user_sign_out
-  get 'users/:id/spotify_currently_playing', to: 'users#spotify_currently_playing', as: :user_spotify_currently_playing
+  get 'users/:id/overlay_data', to: 'users#overlay_data', as: :user_overlay_data
+  get 'users/:id/twitch_webhook/:topic', to: 'users#twitch_webhook_verify', as: :user_twitch_webhook_verify
+  post 'users/:id/twitch_webhook/:topic', to: 'users#twitch_webhook', as: :user_twitch_webhook
 
   devise_for :users, skip: :sessions, class_name: "TwitchEngine::User", controllers: { omniauth_callbacks: "twitch_engine/users/omniauth_callbacks" }
 end

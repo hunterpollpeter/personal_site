@@ -5,14 +5,22 @@ module TwitchEngine
       redirect_to root_path
     end
 
-    def spotify_currently_playing
-      render json: User.find_by(id: user_params[:id])&.spotify_currently_playing
+    def overlay_data
+      render json: User.find_by(id: user_params[:id]).overlay_data(params[:topics])
+    end
+
+    def twitch_webhook_verify
+      render html: user_params[:hub_challenge], staus: 200
+    end
+
+    def twitch_webhook
+      render nothing: true, status: 200, content_type: 'text/html'
     end
 
     private
 
     def user_params
-      params.permit(%i[id])
+      params.permit(%i[id hub_challenge])
     end
   end
 end

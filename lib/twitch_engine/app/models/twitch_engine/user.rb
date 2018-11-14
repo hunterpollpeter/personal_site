@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'httparty'
+include ActionView::Helpers::DateHelper
 
 module TwitchEngine
   class User < ApplicationRecord
@@ -23,10 +24,24 @@ module TwitchEngine
       return unless expires_at
       expires_at = DateTime.strptime(expires_at.to_s,'%s')
       update_attributes!(
-        spotify_token: credentials&.fetch(:token),
-        spotify_refresh_token: credentials&.fetch(:refresh_token),
-        spotify_expires: expires_at
+          spotify_token: credentials&.fetch(:token),
+          spotify_refresh_token: credentials&.fetch(:refresh_token),
+          spotify_expires: expires_at
       )
+    end
+
+    def overlay_data(topics)
+      ret = {}
+      topics&.each do |topic|
+        ret[topic] = send(topic) if self.class.topic_allowed?(topic)
+      end
+      ret
+    end
+
+    private
+
+    def self.topic_allowed?(topic)
+      %w[spotify_currently_playing most_recent_follower].include?(topic)
     end
 
     def spotify_currently_playing
@@ -35,18 +50,39 @@ module TwitchEngine
       # refresh token if it is expired
       refresh_spotify_auth! if spotify_token_expired?
       resp = HTTParty.get(self.class.spotify_currently_playing_path, headers: { 'Authorization': "Bearer #{spotify_token}" })
-      track = resp.fetch('item')
+      track = resp&.fetch('item')
       {
-        title: track.fetch('name'),
-        artists: track.dig('artists').map { |artist| artist.fetch('name') }.to_sentence,
-        album_image: track.dig('album', 'images')[1].fetch('url'),
-        # add 3 seconds for delay
-        duration_pct: (((resp.fetch('progress_ms').to_f + 3000) / track.fetch('duration_ms')) * 100).round(1),
-        is_playing: resp.fetch('is_playing')
+          title: track.fetch('name'),
+          artists: track.dig('artists').map {|artist| artist.fetch('name')}.to_sentence,
+          album_image: track.dig('album', 'images')[1].fetch('url'),
+          # add 3 seconds for delay
+          duration_pct: (((resp.fetch('progress_ms').to_f + 3000) / track.fetch('duration_ms')) * 100).round(1),
+          is_playing: resp.fetch('is_playing')
+      } if track
+    end
+
+    def most_recent_follower
+      # resp = HTTParty.get(self.class.twitch_followers_path, query: { to_id: self.data['uid'], first: 1 }, headers: { 'Client-ID': ENV['TWITCH_CLIENT_ID'] })
+      # resp_data = resp['data'][0]
+      # recent_follower_id = resp_data['from_id']
+      # if data['recent_follower_id'].nil? || data['recent_follower_id'] != recent_follower_id
+      #   self.data['recent_follower_id'] = recent_follower_id
+      #   self.data['recent_follower_name'] = resp_data['from_name']
+      #   self.data['recent_follower_image'] = self.class.user_image(recent_follower_id)
+      #   self.data['recent_follwer_at'] = resp_data['followed_at']
+      #   self.save
+      # end
+      {
+          user_name: self.data['recent_follower_name'],
+          followed_ago: "#{time_ago_in_words(self.data['recent_follwer_at'])} ago",
+          user_image: self.data['recent_follower_image']
       }
     end
 
-    private
+    def self.user_image(user_id)
+      resp = HTTParty.get(twitch_user_path, query: { id: user_id }, headers: { 'Client-ID': ENV['TWITCH_CLIENT_ID'] })
+      resp['data'][0]['profile_image_url']
+    end
 
     def self.spotify_refresh_token_path
       'https://accounts.spotify.com/api/token'
@@ -54,6 +90,14 @@ module TwitchEngine
 
     def self.spotify_currently_playing_path
       'https://api.spotify.com/v1/me/player/currently-playing'
+    end
+
+    def self.twitch_followers_path
+      'https://api.twitch.tv/helix/users/follows'
+    end
+
+    def self.twitch_user_path
+      'https://api.twitch.tv/helix/users'
     end
 
     def refresh_spotify_auth!
