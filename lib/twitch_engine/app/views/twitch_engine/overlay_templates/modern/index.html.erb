@@ -1,0 +1,5 @@
+<div class="wrapper">
+  <% @elements.each do |name, options| %>
+    <%= render partial: "twitch_engine/overlay_templates/modern/#{name}", locals: { options: options } %>
+  <% end %>
+</div>

@@ -6,7 +6,7 @@ module TwitchEngine
       attr_accessor :templates
     end
 
-    def self.overlay_template(id, name, options:)
+    def self.overlay_template(id, name, options)
       templates[id] = { name: name, options: options }
     end
 
@@ -14,19 +14,30 @@ module TwitchEngine
       'twitch_engine/overlay_templates/base'
     end
 
-    def self.defaults(template)
-      options = {}
-      template[:options].each { |k, v| options[k] = v[:default] }
-      options
-    end
-
     # modern template
     overlay_template 1, 'modern',
-                     options: {
-                       name: {
-                         type: :text,
-                         default: 'Your Name'
+                     element_priority: %i[webcam most_recent_follower spotify_currently_playing],
+                     elements: {
+                       webcam: {
+                         enabled: {
+                           type: :boolean,
+                           value: true
+                         }
+                       },
+                       most_recent_follower: {
+                         enabled: {
+                           type: :boolean,
+                           value: true
+                         }
+                       },
+                       spotify_currently_playing: {
+                         requires: :spotify_enabled,
+                         enabled: {
+                           type: :boolean,
+                           value: true
+                         }
                        }
                      }
+
   end
 end

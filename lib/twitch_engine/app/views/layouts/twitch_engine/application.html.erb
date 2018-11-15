@@ -25,7 +25,9 @@
           <%= link_to 'Stream', root_path, class: 'nav-link' %>
         </li>
         <li class="nav-item">
-          <%= link_to 'Overlays', twitch_overlays_path, class: 'nav-link' %>
+          <%= link_to twitch_overlays_path, class: 'nav-link' do %>
+            Overlays <span class="badge badge-twitch">BETA</span>
+          <% end %>
         </li>
       </ul>
       <% if current_user %>

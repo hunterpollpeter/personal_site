@@ -20,8 +20,8 @@
         <h5 class="card-title">Templates</h5>
         <hr>
         <div class="row">
-          <% @templates.each do |template_id| %>
-            <%= render partial: "template", locals: { id: template_id } %>
+          <% @templates.each do |id, template| %>
+            <%= render partial: "template", locals: { id: id, template: template } %>
           <% end %>
         </div>
       </div>

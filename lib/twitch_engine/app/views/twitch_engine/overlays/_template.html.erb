@@ -3,7 +3,7 @@
     <iframe class="thumb" src="<%= twitch_overlay_template_preview_path(id: id) %>"></iframe>
     <div class="content overlay d-flex align-items-end">
       <div class="w-100">
-        <h4 class="text-light mb-2"><%= id %></h4>
+        <h4 class="text-light mb-2"><%= template[:name] %></h4>
         <a href="<%= create_twitch_overlay_path(template_id: id) %>" class="btn btn-outline-twitch-light d-block">Use this template</a>
       </div>
     </div>

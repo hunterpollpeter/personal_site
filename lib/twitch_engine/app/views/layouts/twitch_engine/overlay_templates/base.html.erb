@@ -2,14 +2,14 @@
 <head>
   <%= javascript_include_tag 'jquery3.min.js' %>
   <%= javascript_include_tag template_asset_path 'base' %>
-  <%= javascript_include_tag template_asset_path @name %>
+  <%= javascript_include_tag template_asset_path @template[:name] %>
   <%= yield :script_tags %>
   <%= stylesheet_link_tag template_asset_path 'base' %>
-  <%= stylesheet_link_tag template_asset_path @name %>
+  <%= stylesheet_link_tag template_asset_path @template[:name] %>
   <%= yield :style_tags %>
   <%= yield :style %>
 </head>
-<body>
+<body <%= 'class=body-center' if @preview %>>
   <div id="container">
     <%= yield %>
   </div>
