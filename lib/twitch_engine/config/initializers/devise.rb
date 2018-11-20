@@ -12,7 +12,7 @@ Devise.setup do |config|
   config.sign_out_via = :delete
 
   # twitch strategy
-  config.omniauth :twitch, ENV['TWITCH_CLIENT_ID'], ENV['TWITCH_CLIENT_SECRET'], redirect_uri: 'https://twitch.host.local:3000/users/auth/twitch/callback'
+  config.omniauth :twitch, ENV['TWITCH_CLIENT_ID'], ENV['TWITCH_CLIENT_SECRET'], redirect_uri: ENV['TWITCH_REDIRECT_URI']
 
   # spotify strategy
   config.omniauth :spotify, ENV['SPOTIFY_CLIENT_ID'], ENV['SPOTIFY_CLIENT_SECRET'], scope: 'user-read-currently-playing'

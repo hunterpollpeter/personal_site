@@ -8,9 +8,23 @@ body {
   background-color: $twitch_purple;
 }
 
-.badge-twitch {
-  background-color: rgba(255,255,255,0.5);
-  color: $twitch_purple;
+.nav-item {
+  .nav-link {
+    .badge-twitch {
+      background-color: rgba(255,255,255,0.5);
+      color: $twitch_purple;
+    }
+    &:hover {
+      .badge-twitch {
+        background-color: rgba(255, 255, 255, 0.75);
+      }
+    }
+  }
+  &.active {
+    .badge-twitch {
+      background-color: white !important;
+    }
+  }
 }
 
 .avatar {

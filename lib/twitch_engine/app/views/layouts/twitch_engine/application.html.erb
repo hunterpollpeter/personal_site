@@ -21,14 +21,10 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarsExample04">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <%= link_to 'Stream', root_path, class: 'nav-link' %>
-        </li>
-        <li class="nav-item">
-          <%= link_to twitch_overlays_path, class: 'nav-link' do %>
-            Overlays <span class="badge badge-twitch">BETA</span>
-          <% end %>
-        </li>
+        <%= nav_link 'Stream', root_path, :stream %>
+        <%= nav_link_block twitch_overlays_path, :overlays do %>
+          Overlays <span class="badge badge-twitch">BETA</span>
+        <% end %>
       </ul>
       <% if current_user %>
         <div class="dropdown show">
