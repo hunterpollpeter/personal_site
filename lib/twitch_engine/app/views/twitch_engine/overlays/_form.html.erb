@@ -3,11 +3,15 @@
 <div id="accordion">
   <% @elements.each do |name, options| %>
     <div class="card mb-2">
-      <a class="card-link text-dark" data-toggle="collapse" href="#collapse_<%= name %>" role="button" aria-expanded="false">
-        <div class="card-header border-bottom-0 bg-light">
+      <div class="card-header border-bottom-0 bg-light d-flex align-items-center">
+        <a class="card-link text-dark" data-toggle="collapse" href="#collapse_<%= name %>" role="button" aria-expanded="false">
           <%= name.to_s.humanize %>
+        </a>
+        <div class="toggle ml-auto">
+          <%= check_box_tag "elements[#{name}]", 'enabled', options[:enabled] %>
+          <%= label_tag "elements_#{name}", '', class: 'mb-0' %>
         </div>
-      </a>
+      </div>
       <div id="collapse_<%= name %>" class="collapse" data-parent="#accordion">
         <div class="card-body border-top">
           <%= options %>
@@ -16,3 +20,13 @@
     </div>
   <% end %>
 </div>
+
+<% content_for :script do %>
+  <script type="text/javascript" charset="utf-8">
+		$("input[type='checkbox']").change(function() {
+			 console.log(this.name + '[' + this.value + '] = ' + this.checked);
+			$.post('overlays/<%= @overlay.id %>/update'), {}
+
+		});
+  </script>
+<% end %>

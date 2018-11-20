@@ -19,23 +19,14 @@ module TwitchEngine
                      element_priority: %i[webcam most_recent_follower spotify_currently_playing],
                      elements: {
                        webcam: {
-                         enabled: {
-                           type: :boolean,
-                           value: true
-                         }
+                         enabled: true
                        },
                        most_recent_follower: {
-                         enabled: {
-                           type: :boolean,
-                           value: true
-                         }
+                         enabled: true
                        },
                        spotify_currently_playing: {
-                         requires: :spotify_enabled,
-                         enabled: {
-                           type: :boolean,
-                           value: true
-                         }
+                         requires: %i[spotify_enabled],
+                         enabled: true
                        }
                      }
 

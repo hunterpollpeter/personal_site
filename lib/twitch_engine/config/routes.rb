@@ -6,6 +6,7 @@ TwitchEngine::Engine.routes.draw do
   get 'overlays/:id',         to: 'overlays#show',    as: :twitch_overlay
   get 'overlays/:id/preview', to: 'overlays#preview', as: :twitch_overlay_preview
   get 'overlays/:id/edit',    to: 'overlays#edit',    as: :edit_twitch_overlay
+  post 'overlays/:id/update', to: 'overlays#update',  as: :update_twitch_overlay
 
   get 'templates/:id/preview', to: 'overlays#preview_template', as: :twitch_overlay_template_preview
 
