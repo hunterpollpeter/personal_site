@@ -14,6 +14,10 @@ module TwitchEngine
       end
     end
 
+    def true?(obj)
+      obj.to_s == 'true'
+    end
+
     private
 
     def current_controller?(controller)

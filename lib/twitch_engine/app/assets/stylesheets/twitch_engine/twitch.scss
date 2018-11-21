@@ -4,6 +4,10 @@ body {
   background-color: $light;
 }
 
+.card {
+  overflow: hidden;
+}
+
 .bg-twitch {
   background-color: $twitch_purple;
 }
@@ -87,7 +91,7 @@ body {
       top: 0;
       left: 0;
       transform-origin: top left;
-      transition: opacity 0.4s ease;
+      transition: all 0.4s ease;
       opacity: 0;
       visibility: hidden;
 
@@ -166,4 +170,37 @@ body {
       width: 19px;
     }
   }
+}
+
+.loading-cover {
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(255,255,255,0.75);
+    z-index: 1000;
+  }
+  &:after {
+    content: '';
+    box-sizing: border-box;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 50px;
+    height: 50px;
+    margin-top: -25px;
+    margin-left: -25px;
+    border-radius: 50%;
+    border: 3px solid rgba(0, 0, 0, 0.125);
+    border-top-color: $twitch_purple;
+    animation: spinner 1s linear infinite;
+    z-index: 1001;
+  }
+}
+
+@keyframes spinner {
+  to {transform: rotate(360deg);}
 }

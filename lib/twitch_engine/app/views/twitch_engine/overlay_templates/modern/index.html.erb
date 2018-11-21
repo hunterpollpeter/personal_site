@@ -1,5 +1,5 @@
 <div class="wrapper">
   <% @elements.each do |name, options| %>
-    <%= render partial: "twitch_engine/overlay_templates/modern/#{name}", locals: { options: options } if options[:enabled]%>
+    <%= render partial: "twitch_engine/overlay_templates/modern/#{name}", locals: { options: options } if true?(options[:enabled])%>
   <% end %>
 </div>

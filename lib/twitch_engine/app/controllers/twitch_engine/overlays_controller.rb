@@ -1,5 +1,7 @@
 module TwitchEngine
   class OverlaysController < ApplicationController
+    skip_before_action :verify_authenticity_token #TODO: make it work without using this
+
     def index
       @templates = OverlayTemplate.templates
       @overlays = current_user&.overlays&.all
@@ -13,6 +15,10 @@ module TwitchEngine
     def edit
       @overlay = Overlay.find_by(id: overlays_params[:id])
       @elements = @overlay.prioritized_elements
+    end
+
+    def update
+      Overlay.find_by(id: overlays_params[:id])&.update_options(overlays_options_params)
     end
 
     def template
@@ -40,7 +46,11 @@ module TwitchEngine
     private
 
     def overlays_params
-      params.permit(%i[id template_id])
+      params.permit(%i[id template_id options])
+    end
+
+    def overlays_options_params
+      params.require(:options).permit!
     end
   end
 end

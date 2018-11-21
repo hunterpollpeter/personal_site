@@ -15,8 +15,13 @@ module TwitchEngine
       priority
     end
 
+    def update_options(new_options)
+      self.options.deep_merge!(new_options)
+      self.save
+    end
+
     def elements
-      OverlayTemplate.templates[template_id].dig(:options, :elements).deep_merge(options.fetch(:elements, nil) || {})
+      OverlayTemplate.templates[template_id].dig(:options, :elements).deep_merge(options.deep_symbolize_keys.fetch(:elements, nil) || {})
     end
 
     def element_priority
