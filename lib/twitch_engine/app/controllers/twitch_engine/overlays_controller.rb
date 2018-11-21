@@ -27,6 +27,7 @@ module TwitchEngine
 
     def preview_template
       @template = OverlayTemplate.templates[overlays_params[:id].to_i]
+      @elements = @template.dig(:options, :elements)
       @preview = true
       template
     end

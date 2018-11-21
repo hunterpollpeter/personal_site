@@ -201,6 +201,11 @@ body {
   }
 }
 
+input:focus {
+  border-color: $twitch_purple !important;
+  box-shadow: 0 0 0 0.2rem transparentize($twitch_purple, 0.75) !important;
+}
+
 @keyframes spinner {
   to {transform: rotate(360deg);}
 }
