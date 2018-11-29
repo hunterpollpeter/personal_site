@@ -33,8 +33,17 @@
         forceFallback: true,
         handle: ".handle",
         onUpdate: function () {
-          $('#options').addClass('loading-cover');
-          $.post('update', {options: {element_priority: $.map($('.element'), function(element) { return $(element).data('name') })}})
+          update_options({options: {element_priority: $.map($('.element'), function(element) { return $(element).data('name') })}})
+        }
+    });
+
+		$("input[type='checkbox']").change(function() {
+			update_options({options: {elements: {[this.name]: {[this.value]: this.checked }}}});
+		});
+
+		function update_options(data) {
+        $('#options').addClass('loading-cover');
+        $.post('update', data)
             .done(function() {
                 // reload iframe
                 var $iframe = $('iframe');
@@ -47,24 +56,6 @@
             .always(function() {
                 $('#options').removeClass('loading-cover');
             });
-        }
-    });
-
-		$("input[type='checkbox']").change(function() {
-			$('#options').addClass('loading-cover');
-      $.post('update',{options: {elements: {[this.name]: {[this.value]: this.checked }}}})
-        .done(function() {
-        	// reload iframe
-          var $iframe = $('iframe');
-          $iframe.removeClass('loaded');
-					$iframe.attr( 'src', function ( _, val ) { return val; });
-				})
-        .fail(function () {
-          this.checked = !this.checked
-				})
-        .always(function() {
-					$('#options').removeClass('loading-cover');
-        });
-		});
+    }
   </script>
 <% end %>
