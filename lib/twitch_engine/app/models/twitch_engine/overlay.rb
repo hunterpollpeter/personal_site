@@ -20,6 +20,10 @@ module TwitchEngine
       self.save
     end
 
+    def update_name(name)
+      self.update_attribute(:name, name)
+    end
+
     def elements
       OverlayTemplate.templates[template_id].dig(:options, :elements).deep_merge(options.deep_symbolize_keys.fetch(:elements, nil) || {})
     end

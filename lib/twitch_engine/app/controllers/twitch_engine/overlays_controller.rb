@@ -18,7 +18,9 @@ module TwitchEngine
     end
 
     def update
-      Overlay.find_by(id: overlays_params[:id])&.update_options(overlays_options_params)
+      overlay = Overlay.find_by(id: overlays_params[:id])
+      overlay&.update_options(overlays_options_params) if params[:options]
+      overlay&.update_name(overlays_params[:name]) if overlays_params[:name]
     end
 
     def template
@@ -47,7 +49,7 @@ module TwitchEngine
     private
 
     def overlays_params
-      params.permit(%i[id template_id options])
+      params.permit(%i[id template_id name])
     end
 
     def overlays_options_params

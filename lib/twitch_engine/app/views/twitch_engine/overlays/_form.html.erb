@@ -41,6 +41,10 @@
 			update_options({options: {elements: {[this.name]: {[this.value]: this.checked }}}});
 		});
 
+		$('#name').on('change keyup paste', function() {
+		    update_name($(this).val());
+    });
+
 		function update_options(data) {
         $('#options').addClass('loading-cover');
         $.post('update', data)
@@ -56,6 +60,14 @@
             .always(function() {
                 $('#options').removeClass('loading-cover');
             });
+    }
+
+    var name_timeout;
+    function update_name(name) {
+        clearTimeout(name_timeout);
+        name_timeout = setTimeout(function() {
+            $.post('update', {name: name});
+        }, 1000);
     }
   </script>
 <% end %>
