@@ -172,6 +172,14 @@ body {
   }
 }
 
+.handle {
+  font-size: 0;
+  fill: grey;
+  &:hover {
+    fill: $twitch_purple;
+  }
+}
+
 .loading-cover {
   &:before {
     content: '';
@@ -199,6 +207,10 @@ body {
     animation: spinner 1s linear infinite;
     z-index: 1001;
   }
+}
+
+.sortable-ghost {
+  opacity: 0;
 }
 
 input:focus {

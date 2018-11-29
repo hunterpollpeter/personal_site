@@ -2,14 +2,19 @@
 <hr>
 <div id="accordion">
   <% @elements.each do |name, options| %>
-    <div class="card mb-2">
+    <div class="element card mb-2" data-name="<%= name %>">
       <div class="card-header border-bottom-0 bg-light d-flex align-items-center">
         <a class="card-link text-dark" data-toggle="collapse" href="#collapse_<%= name %>" role="button" aria-expanded="false">
           <%= name.to_s.humanize %>
         </a>
-        <div class="toggle ml-auto">
-          <%= check_box_tag name, 'enabled', true?(options[:enabled]) %>
-          <%= label_tag name, '', class: 'mb-0' %>
+        <div class="ml-auto d-flex align-items-center">
+          <div class="toggle mr-2">
+            <%= check_box_tag name, 'enabled', true?(options[:enabled]) %>
+            <%= label_tag name, '', class: 'mb-0' %>
+          </div>
+          <div class="handle">
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="7 5 10 14" xml:space="preserve" width="10px" height="15px"><g><path d="M8.0502605,13h7.8994789c0.8909054,0,1.3370705,1.0771418,0.7071056,1.7071066l-3.9497385,3.9497385   c-0.3905239,0.3905258-1.0236893,0.3905258-1.4142132,0L7.343154,14.7071066C6.7131891,14.0771418,7.1593561,13,8.0502605,13z    M8.0502605,11h7.8994789c0.8909054,0,1.3370705-1.0771418,0.7071056-1.7071066L12.7071066,5.343154   c-0.3905239-0.3905239-1.0236893-0.3905239-1.4142132,0L7.343154,9.2928934C6.7131891,9.9228582,7.1593561,11,8.0502605,11z"/></g></svg>
+          </div>
         </div>
       </div>
       <div id="collapse_<%= name %>" class="collapse" data-parent="#accordion">
@@ -23,6 +28,28 @@
 
 <% content_for :script do %>
   <script type="text/javascript" charset="utf-8">
+    $("#accordion").sortable({
+        animation: 150,
+        forceFallback: true,
+        handle: ".handle",
+        onUpdate: function () {
+          $('#options').addClass('loading-cover');
+          $.post('update', {options: {element_priority: $.map($('.element'), function(element) { return $(element).data('name') })}})
+            .done(function() {
+                // reload iframe
+                var $iframe = $('iframe');
+                $iframe.removeClass('loaded');
+                $iframe.attr( 'src', function ( _, val ) { return val; });
+            })
+            .fail(function () {
+                this.checked = !this.checked
+            })
+            .always(function() {
+                $('#options').removeClass('loading-cover');
+            });
+        }
+    });
+
 		$("input[type='checkbox']").change(function() {
 			$('#options').addClass('loading-cover');
       $.post('update',{options: {elements: {[this.name]: {[this.value]: this.checked }}}})
@@ -37,7 +64,7 @@
 				})
         .always(function() {
 					$('#options').removeClass('loading-cover');
-        })
+        });
 		});
   </script>
 <% end %>

@@ -25,7 +25,7 @@ module TwitchEngine
     end
 
     def element_priority
-      priority = options.fetch(:element_priority, nil) || []
+      priority = (options.deep_symbolize_keys.fetch(:element_priority, nil) || []).map(&:to_sym)
       priority + (OverlayTemplate.templates[template_id].dig(:options, :element_priority) - priority)
     end
   end
