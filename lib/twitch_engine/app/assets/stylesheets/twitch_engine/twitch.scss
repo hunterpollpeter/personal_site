@@ -172,14 +172,6 @@ body {
   }
 }
 
-.handle {
-  font-size: 0;
-  fill: grey;
-  &:hover {
-    fill: $twitch_purple;
-  }
-}
-
 .loading-cover {
   &:before {
     content: '';
