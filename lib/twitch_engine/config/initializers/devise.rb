@@ -15,5 +15,5 @@ Devise.setup do |config|
   config.omniauth :twitch, ENV['TWITCH_CLIENT_ID'], ENV['TWITCH_CLIENT_SECRET'], redirect_uri: ENV['TWITCH_REDIRECT_URI']
 
   # spotify strategy
-  config.omniauth :spotify, ENV['SPOTIFY_CLIENT_ID'], ENV['SPOTIFY_CLIENT_SECRET'], scope: 'user-read-currently-playing'
+  config.omniauth :spotify, ENV['SPOTIFY_CLIENT_ID'], ENV['SPOTIFY_CLIENT_SECRET'], callback_url: ENV['SPOTIFY_REDIRECT_URI'], scope: 'user-read-currently-playing'
 end
